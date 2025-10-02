@@ -30,6 +30,114 @@ export default class EditorCommandsRemapPlugin extends Plugin {
 		});
 
 		this.addCommand({
+			id: 'go-word-left',
+			name: 'go word left',
+			editorCallback: (editor: Editor) => {
+				const cursor = editor.getCursor();
+				const line = editor.getLine(cursor.line);
+				let ch = cursor.ch;
+				
+				while (ch > 0 && /\s/.test(line[ch - 1])) ch--;
+				while (ch > 0 && !/\s/.test(line[ch - 1])) ch--;
+				
+				editor.setCursor({ line: cursor.line, ch });
+			}
+		});
+
+		this.addCommand({
+			id: 'go-word-right',
+			name: 'go word right',
+			editorCallback: (editor: Editor) => {
+				const cursor = editor.getCursor();
+				const line = editor.getLine(cursor.line);
+				let ch = cursor.ch;
+				
+				while (ch < line.length && !/\s/.test(line[ch])) ch++;
+				while (ch < line.length && /\s/.test(line[ch])) ch++;
+				
+				editor.setCursor({ line: cursor.line, ch });
+			}
+		});
+
+		this.addCommand({
+			id: 'go-left-select',
+			name: 'go left with selection',
+			editorCallback: (editor: Editor) => {
+				const cursor = editor.getCursor();
+				const anchor = editor.getCursor('anchor');
+				const newCursor = { line: cursor.line, ch: Math.max(0, cursor.ch - 1) };
+				editor.setSelection(anchor, newCursor);
+			}
+		});
+
+		this.addCommand({
+			id: 'go-right-select',
+			name: 'go right with selection',
+			editorCallback: (editor: Editor) => {
+				const cursor = editor.getCursor();
+				const anchor = editor.getCursor('anchor');
+				const line = editor.getLine(cursor.line);
+				const newCursor = { line: cursor.line, ch: Math.min(line.length, cursor.ch + 1) };
+				editor.setSelection(anchor, newCursor);
+			}
+		});
+
+		this.addCommand({
+			id: 'go-up-select',
+			name: 'go up with selection',
+			editorCallback: (editor: Editor) => {
+				const cursor = editor.getCursor();
+				const anchor = editor.getCursor('anchor');
+				const newCursor = { line: Math.max(0, cursor.line - 1), ch: cursor.ch };
+				editor.setSelection(anchor, newCursor);
+			}
+		});
+
+		this.addCommand({
+			id: 'go-down-select',
+			name: 'go down with selection',
+			editorCallback: (editor: Editor) => {
+				const cursor = editor.getCursor();
+				const anchor = editor.getCursor('anchor');
+				const lineCount = editor.lineCount();
+				const newCursor = { line: Math.min(lineCount - 1, cursor.line + 1), ch: cursor.ch };
+				editor.setSelection(anchor, newCursor);
+			}
+		});
+
+		this.addCommand({
+			id: 'go-word-left-select',
+			name: 'go word left with selection',
+			editorCallback: (editor: Editor) => {
+				const cursor = editor.getCursor();
+				const anchor = editor.getCursor('anchor');
+				const line = editor.getLine(cursor.line);
+				let ch = cursor.ch;
+				
+				while (ch > 0 && /\s/.test(line[ch - 1])) ch--;
+				while (ch > 0 && !/\s/.test(line[ch - 1])) ch--;
+				
+				editor.setSelection(anchor, { line: cursor.line, ch });
+			}
+		});
+
+		this.addCommand({
+			id: 'go-word-right-select',
+			name: 'go word right with selection',
+			editorCallback: (editor: Editor) => {
+				const cursor = editor.getCursor();
+				const anchor = editor.getCursor('anchor');
+				const line = editor.getLine(cursor.line);
+				let ch = cursor.ch;
+				
+				while (ch < line.length && !/\s/.test(line[ch])) ch++;
+				while (ch < line.length && /\s/.test(line[ch])) ch++;
+				
+				editor.setSelection(anchor, { line: cursor.line, ch });
+			}
+		});
+
+		this.addCommand({
 			id: 'go-start',
 			name: 'go to start',
 			editorCallback: editor => editor.exec('goStart')

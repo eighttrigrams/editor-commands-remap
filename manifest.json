@@ -1,10 +1,10 @@
 {
 	"id": "editor-commands-remap",
-	"name": "Editor Commands Remap",
-	"version": "1.0.2",
+	"name": "Editor Commands Remap new",
+	"version": "1.0.3",
 	"minAppVersion": "0.9.7",
 	"description": "Map hotkeys to editor commands.",
-	"author": "cactus5",
-	"authorUrl": "https://github.com/c4ctus5",
+	"author": "cactus5 -> Daniel",
+	"authorUrl": "https://github.com/eighttrigrams",
 	"isDesktopOnly": false
 }

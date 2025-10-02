@@ -37,3 +37,13 @@ To set hotkeys, go to `Settings > Hotkeys` and search for `Editor Commands Remap
 ## Hotkeys recommendations
 When moving the cursor, pressing `Shift` or `Ctrl+Shift` also select text. Thus, it is not recommended to use `Ctrl` or `Shift` as hotkey modifiers for moving the cursor.
 `Alt` is the recommended modifier.
+
+## Installation and development instructions
+
+```
+$ npm install
+$ npm run dev
+ln -s /Users/daniel/Workspace/eighttrigrams/editor-commands-remap /Users/daniel/Documents/Obsidian\ Vaults/Default\ Vault/.obsidian/plugins/editor-commands-remap
+```
+
+The artifacts are 
