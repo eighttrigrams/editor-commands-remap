@@ -138,6 +138,35 @@ export default class EditorCommandsRemapPlugin extends Plugin {
 		});
 
 		this.addCommand({
+			id: 'delete-word-right',
+			name: 'delete word right',
+			editorCallback: (editor: Editor) => {
+				const cursor = editor.getCursor();
+				const line = editor.getLine(cursor.line);
+				let endCh = cursor.ch;
+				
+				while (endCh < line.length && !/\s/.test(line[endCh])) endCh++;
+				while (endCh < line.length && /\s/.test(line[endCh])) endCh++;
+				
+				editor.replaceRange('', cursor, { line: cursor.line, ch: endCh });
+			}
+		});
+
+		this.addCommand({
+			id: 'delete-char-right',
+			name: 'delete character right',
+			editorCallback: (editor: Editor) => {
+				const cursor = editor.getCursor();
+				const line = editor.getLine(cursor.line);
+				if (cursor.ch < line.length) {
+					editor.replaceRange('', cursor, { line: cursor.line, ch: cursor.ch + 1 });
+				} else if (cursor.line < editor.lineCount() - 1) {
+					editor.replaceRange('', cursor, { line: cursor.line + 1, ch: 0 });
+				}
+			}
+		});
+
+		this.addCommand({
 			id: 'go-start',
 			name: 'go to start',
 			editorCallback: editor => editor.exec('goStart')

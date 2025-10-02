@@ -40,10 +40,12 @@ When moving the cursor, pressing `Shift` or `Ctrl+Shift` also select text. Thus,
 
 ## Installation and development instructions
 
+The underlying technology is Code Mirror 6
+
 ```
 $ npm install
 $ npm run dev
 ln -s /Users/daniel/Workspace/eighttrigrams/editor-commands-remap /Users/daniel/Documents/Obsidian\ Vaults/Default\ Vault/.obsidian/plugins/editor-commands-remap
 ```
 
-The artifacts are 
+The vault's `.obsidian/hotkeys.json` will have the bindings, independent of the plugin existing or not.
