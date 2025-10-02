@@ -242,6 +242,29 @@ export default class EditorCommandsRemapPlugin extends Plugin {
 		});
 
 		this.addCommand({
+			id: 'new-line-below',
+			name: 'new line below',
+			editorCallback: (editor: Editor) => {
+				const cursor = editor.getCursor();
+				const line = editor.getLine(cursor.line);
+				editor.setCursor({ line: cursor.line, ch: line.length });
+				editor.replaceRange('\n', editor.getCursor());
+				editor.setCursor({ line: cursor.line + 1, ch: 0 });
+			}
+		});
+
+		this.addCommand({
+			id: 'new-line-above',
+			name: 'new line above',
+			editorCallback: (editor: Editor) => {
+				const cursor = editor.getCursor();
+				editor.setCursor({ line: cursor.line, ch: 0 });
+				editor.replaceRange('\n', editor.getCursor());
+				editor.setCursor({ line: cursor.line, ch: 0 });
+			}
+		});
+
+		this.addCommand({
 			id: 'go-start',
 			name: 'go to start',
 			editorCallback: editor => editor.exec('goStart')
