@@ -167,6 +167,81 @@ export default class EditorCommandsRemapPlugin extends Plugin {
 		});
 
 		this.addCommand({
+			id: 'undo',
+			name: 'undo',
+			editorCallback: (editor: Editor) => {
+				(editor as any).undo();
+			}
+		});
+
+		this.addCommand({
+			id: 'redo',
+			name: 'redo',
+			editorCallback: (editor: Editor) => {
+				(editor as any).redo();
+			}
+		});
+
+		this.addCommand({
+			id: 'go-line-start',
+			name: 'go to line start',
+			editorCallback: (editor: Editor) => {
+				const cursor = editor.getCursor();
+				editor.setCursor({ line: cursor.line, ch: 0 });
+			}
+		});
+
+		this.addCommand({
+			id: 'go-line-end',
+			name: 'go to line end',
+			editorCallback: (editor: Editor) => {
+				const cursor = editor.getCursor();
+				const line = editor.getLine(cursor.line);
+				editor.setCursor({ line: cursor.line, ch: line.length });
+			}
+		});
+
+		this.addCommand({
+			id: 'go-line-start-select',
+			name: 'go to line start with selection',
+			editorCallback: (editor: Editor) => {
+				const cursor = editor.getCursor();
+				const anchor = editor.getCursor('anchor');
+				editor.setSelection(anchor, { line: cursor.line, ch: 0 });
+			}
+		});
+
+		this.addCommand({
+			id: 'go-line-end-select',
+			name: 'go to line end with selection',
+			editorCallback: (editor: Editor) => {
+				const cursor = editor.getCursor();
+				const anchor = editor.getCursor('anchor');
+				const line = editor.getLine(cursor.line);
+				editor.setSelection(anchor, { line: cursor.line, ch: line.length });
+			}
+		});
+
+		this.addCommand({
+			id: 'delete-to-line-start',
+			name: 'delete to line start',
+			editorCallback: (editor: Editor) => {
+				const cursor = editor.getCursor();
+				editor.replaceRange('', { line: cursor.line, ch: 0 }, cursor);
+			}
+		});
+
+		this.addCommand({
+			id: 'delete-to-line-end',
+			name: 'delete to line end',
+			editorCallback: (editor: Editor) => {
+				const cursor = editor.getCursor();
+				const line = editor.getLine(cursor.line);
+				editor.replaceRange('', cursor, { line: cursor.line, ch: line.length });
+			}
+		});
+
+		this.addCommand({
 			id: 'go-start',
 			name: 'go to start',
 			editorCallback: editor => editor.exec('goStart')
