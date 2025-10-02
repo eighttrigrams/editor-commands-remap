@@ -1,5 +1,19 @@
 # Editor Commands Remap : Obsidian Plugin
 
+Note that the underlying technology of Obsidian is Code Mirror 6.
+
+## Installation and development instructions
+
+```
+$ npm install
+$ npm run dev
+```
+
+The vault's `.obsidian/hotkeys.json` will have the bindings, independent of the plugin existing or not.
+
+---
+Original README contents
+
 This plugin for [Obsidian](https://obsidian.md) let's you map hotkeys to editor commands available in the API.
 Available commands are :
 - `goUp` : move cursor up a line
@@ -37,15 +51,3 @@ To set hotkeys, go to `Settings > Hotkeys` and search for `Editor Commands Remap
 ## Hotkeys recommendations
 When moving the cursor, pressing `Shift` or `Ctrl+Shift` also select text. Thus, it is not recommended to use `Ctrl` or `Shift` as hotkey modifiers for moving the cursor.
 `Alt` is the recommended modifier.
-
-## Installation and development instructions
-
-The underlying technology is Code Mirror 6
-
-```
-$ npm install
-$ npm run dev
-ln -s /Users/daniel/Workspace/eighttrigrams/editor-commands-remap /Users/daniel/Documents/Obsidian\ Vaults/Default\ Vault/.obsidian/plugins/editor-commands-remap
-```
-
-The vault's `.obsidian/hotkeys.json` will have the bindings, independent of the plugin existing or not.
