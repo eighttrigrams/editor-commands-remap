@@ -30,6 +30,17 @@ export default class EditorCommandsRemapPlugin extends Plugin {
 		});
 
 		this.addCommand({
+			id: 'select-all-text',
+			name: 'select all text',
+			editorCallback: (editor) => {
+				editor.setSelection(
+					{ line: 0, ch: 0 },
+					{ line: editor.lineCount() - 1, ch: editor.getLine(editor.lineCount() - 1).length }
+				);
+			}
+		});
+
+		this.addCommand({
 			id: 'go-word-left',
 			name: 'go word left',
 			editorCallback: (editor: Editor) => {
