@@ -265,6 +265,38 @@ export default class EditorCommandsRemapPlugin extends Plugin {
 		});
 
 		this.addCommand({
+			id: 'copy',
+			name: 'copy',
+			editorCallback: async (editor: Editor) => {
+				const selection = editor.getSelection();
+				if (selection) {
+					await navigator.clipboard.writeText(selection);
+				}
+			}
+		});
+
+		this.addCommand({
+			id: 'cut',
+			name: 'cut',
+			editorCallback: async (editor: Editor) => {
+				const selection = editor.getSelection();
+				if (selection) {
+					await navigator.clipboard.writeText(selection);
+					editor.replaceSelection('');
+				}
+			}
+		});
+
+		this.addCommand({
+			id: 'paste',
+			name: 'paste',
+			editorCallback: async (editor: Editor) => {
+				const text = await navigator.clipboard.readText();
+				editor.replaceSelection(text);
+			}
+		});
+
+		this.addCommand({
 			id: 'go-start',
 			name: 'go to start',
 			editorCallback: editor => editor.exec('goStart')
